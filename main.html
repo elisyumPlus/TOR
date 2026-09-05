@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="tr" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOR | Endüstriyel Kepenk & Otomasyon Sistemleri</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            noir: {
+              50: '#f6f6f6',  
+              100: '#e7e7e7',
+              200: '#d1d1d1',
+              300: '#b0b0b0',
+              400: '#888888',
+              500: '#6d6d6d',
+              600: '#5d5d5d',
+              700: '#4f4f4f',
+              800: '#18181b',
+              900: '#09090b',
+              950: '#000000',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
+    }
+
+    .glass-noir {
+      background: rgba(9, 9, 11, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    
+    .border-subtle {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .grid-bg {
+      background-size: 30px 30px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="bg-noir-950 text-noir-100 font-sans antialiased selection:bg-white selection:text-black min-h-screen flex flex-col grid-bg">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-white text-black text-[11px] font-mono tracking-widest uppercase py-1.5 px-4 text-center font-bold flex justify-between items-center border-b border-white">
+    <span class="hidden sm:inline">TOR ENDÜSTRİYEL KEPENK SİSTEMLERİ & OTOMASYON</span>
+    <span class="mx-auto sm:mx-0 font-extrabold">⚡ ANINDA TELEGRAM ENTEGRASYONLU SİPARİŞ HATTI</span>
+    <span class="text-[10px] hidden md:inline opacity-80">DOĞRUDAN FABRİKA SEVKİYAT</span>
+  </div>
+
+  <!-- Header / Navbar -->
+  <header class="sticky top-0 z-40 glass-noir border-b border-subtle">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Brand Logo -->
+        <div class="flex items-center space-x-3 cursor-pointer" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+          <div class="w-10 h-10 bg-white text-black flex items-center justify-center font-black text-2xl tracking-tighter rounded-sm shadow-lg">
+            T
+          </div>
+          <div class="flex flex-col">
+            <span class="text-2xl font-black tracking-widest uppercase leading-none text-white">TOR</span>
+            <span class="text-[9px] font-mono tracking-widest text-noir-400 uppercase mt-1">INDUSTRIAL SHUTTER SYSTEMS</span>
+          </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-8 text-xs font-mono tracking-wider uppercase">
+          <a href="#products" class="text-noir-300 hover:text-white transition-colors">Ürün Kataloğu</a>
+          <a href="#about" class="text-noir-300 hover:text-white transition-colors">Teknik Özellikler</a>
+          <a href="#contact" class="text-noir-300 hover:text-white transition-colors">İletişim</a>
+        </nav>
+
+        <!-- Right Action Controls -->
+        <div class="flex items-center space-x-4">
+          <!-- Cart Drawer Button -->
+          <button onclick="toggleCartDrawer(true)" class="relative bg-white text-black font-mono text-xs font-bold px-4 py-2.5 flex items-center space-x-2 hover:bg-noir-200 transition-all rounded-sm shadow-md">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+            </svg>
+            <span class="uppercase tracking-wider">SEPET</span>
+            <span id="cart-badge" class="bg-black text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold ml-1">0</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative border-b border-subtle py-20 lg:py-28 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center space-x-2 border border-subtle px-3 py-1 text-xs font-mono text-noir-400 uppercase tracking-widest bg-black">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>TÜRKİYE GENELİ DOĞRUDAN SEVKİYAT</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white uppercase leading-none">
+            ENDÜSTRİYEL KEPENK <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-noir-200 to-noir-500">
+              MALZEMELERİ & MOTORLARI
+            </span>
+          </h1>
+
+          <p class="text-noir-300 text-sm sm:text-base max-w-xl font-light leading-relaxed">
+            TOR Güvencesiyle yüksek mukavemetli çelik ve alüminyum paletler, tüp motorlar, kontrol üniteleri ve güvenlik ekipmanları. Doğrudan fabrika çıkışlı kaliteli aksamlar.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-4 pt-4 font-mono text-xs">
+            <a href="#products" class="bg-white text-black font-bold px-8 py-4 uppercase tracking-widest text-center hover:bg-noir-200 transition-all rounded-sm">
+              ÜRÜNLERİ İNCELE ↓
+            </a>
+            <button onclick="toggleCartDrawer(true)" class="border border-subtle text-white font-bold px-8 py-4 uppercase tracking-widest text-center hover:bg-white hover:text-black transition-all rounded-sm">
+              SEPETİ GÖRÜNTÜLE
+            </button>
+          </div>
+
+          <!-- Key Metrics -->
+          <div class="grid grid-cols-3 gap-4 border-t border-subtle pt-8 mt-8 font-mono">
+            <div>
+              <div class="text-2xl font-black text-white">50.000+</div>
+              <div class="text-[10px] text-noir-400 uppercase">Aylık Parça Üretimi</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-white">%100</div>
+              <div class="text-[10px] text-noir-400 uppercase">Ağır Hizmet Standardı</div>
+            </div>
+            <div>
+              <div class="text-2xl font-black text-white">24/7</div>
+              <div class="text-[10px] text-noir-400 uppercase">Telegram Sipariş Takibi</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Mockup -->
+        <div class="lg:col-span-5 relative">
+          <div class="border border-subtle bg-noir-900 p-6 rounded-sm space-y-4 shadow-2xl relative">
+            <div class="flex justify-between items-center border-b border-subtle pb-3">
+              <span class="text-xs font-mono text-noir-400">TOR-SYS v4.2 // KATALOG</span>
+              <span class="text-[10px] font-mono bg-white text-black px-2 py-0.5 font-bold">CANLI STOK</span>
+            </div>
+            
+            <!-- Graphic Illustration of Shutter -->
+            <div class="bg-black p-4 border border-subtle space-y-1.5 min-h-[220px] flex flex-col justify-center">
+              <div class="h-3 bg-noir-800 border-b border-noir-700 w-full rounded-xs"></div>
+              <div class="h-3 bg-noir-800 border-b border-noir-700 w-full rounded-xs"></div>
+              <div class="h-3 bg-noir-800 border-b border-noir-700 w-full rounded-xs"></div>
+              <div class="h-3 bg-noir-800 border-b border-noir-700 w-full rounded-xs"></div>
+              <div class="h-3 bg-noir-800 border-b border-noir-700 w-3/4 rounded-xs"></div>
+              <div class="h-3 bg-noir-800 border-b border-noir-700 w-1/2 rounded-xs"></div>
+              <div class="text-center pt-4">
+                <span class="text-[11px] font-mono text-noir-400 uppercase">Endüstriyel Otomasyon & Çelik Palet Teknolojisi</span>
+              </div>
+            </div>
+
+            <div class="flex justify-between text-xs font-mono text-noir-300 pt-2">
+              <span>Ağır Tip Tüp Motorlar</span>
+              <span class="text-white font-bold">120 Nm - 600 Nm</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Catalog Section -->
+  <section id="products" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-grow w-full">
+    
+    <!-- Section Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-subtle gap-4">
+      <div>
+        <span class="text-xs font-mono text-noir-400 uppercase tracking-widest">// SİSTEM EKİPMANLARI</span>
+        <h2 class="text-3xl font-black uppercase text-white tracking-tight">ÜRÜN KATALOĞU</h2>
+      </div>
+
+      <!-- Search Input -->
+      <div class="flex flex-col sm:flex-row gap-3">
+        <div class="relative">
+          <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="Ürün veya parça ara..." class="bg-black border border-subtle px-4 py-2 text-xs text-white placeholder-noir-500 focus:outline-none focus:border-white font-mono w-full sm:w-64">
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Tabs -->
+    <div class="flex items-center space-x-2 overflow-x-auto pb-4 mb-8 font-mono text-xs scrollbar-none" id="category-tabs">
+      <button onclick="selectCategory('ALL')" class="cat-btn active border border-white bg-white text-black px-4 py-2 font-bold whitespace-nowrap uppercase transition-all">TÜMÜ</button>
+      <button onclick="selectCategory('MOTOR')" class="cat-btn border border-subtle text-noir-300 hover:text-white hover:border-white px-4 py-2 font-bold whitespace-nowrap uppercase transition-all">MOTORLAR</button>
+      <button onclick="selectCategory('KONTROL')" class="cat-btn border border-subtle text-noir-300 hover:text-white hover:border-white px-4 py-2 font-bold whitespace-nowrap uppercase transition-all">KONTROL & KUMANDA</button>
+      <button onclick="selectCategory('PALET')" class="cat-btn border border-subtle text-noir-300 hover:text-white hover:border-white px-4 py-2 font-bold whitespace-nowrap uppercase transition-all">PALET & PROFİL</button>
+      <button onclick="selectCategory('GÜVENLİK')" class="cat-btn border border-subtle text-noir-300 hover:text-white hover:border-white px-4 py-2 font-bold whitespace-nowrap uppercase transition-all">GÜVENLİK & AKSESUAR</button>
+    </div>
+
+    <!-- Products Grid Container -->
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <!-- Products dynamically injected via JavaScript -->
+    </div>
+
+  </section>
+
+  <!-- Features / About Section -->
+  <section id="about" class="border-t border-subtle bg-black py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center sm:text-left">
+        
+        <div class="border border-subtle p-6 bg-noir-900 rounded-sm space-y-3">
+          <div class="w-10 h-10 border border-white flex items-center justify-center font-mono font-bold text-lg text-white">01</div>
+          <h3 class="font-bold text-white uppercase text-base">Ağır Hizmet Kalitesi</h3>
+          <p class="text-xs text-noir-400 font-light leading-relaxed">
+            Tüm motorlar ve çelik aksamlar sanayi standartlarına uygun, korozyona dayanıklı malzeme testlerinden geçirilerek sevk edilir.
+          </p>
+        </div>
+
+        <div class="border border-subtle p-6 bg-noir-900 rounded-sm space-y-3">
+          <div class="w-10 h-10 border border-white flex items-center justify-center font-mono font-bold text-lg text-white">02</div>
+          <h3 class="font-bold text-white uppercase text-base">Hızlı Telegram Bildirimi</h3>
+          <p class="text-xs text-noir-400 font-light leading-relaxed">
+            Sipariş verdiğiniz an detaylı malzeme listesi doğrudan firma Telegram hattına bildirim olarak düşer ve işleme alınır.
+          </p>
+        </div>
+
+        <div class="border border-subtle p-6 bg-noir-900 rounded-sm space-y-3">
+          <div class="w-10 h-10 border border-white flex items-center justify-center font-mono font-bold text-lg text-white">03</div>
+          <h3 class="font-bold text-white uppercase text-base">Teknik Destek & Lojistik</h3>
+          <p class="text-xs text-noir-400 font-light leading-relaxed">
+            Doğru motor Nm seçimi ve yay montajı aşamasında teknik ekibimizden kesintisiz destek alabilirsiniz.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact" class="border-t border-subtle bg-noir-950 py-12 text-xs font-mono text-noir-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="space-y-1 text-center md:text-left">
+        <div class="text-white font-bold text-lg tracking-widest">TOR KEPENK SİSTEMLERİ SAN. TİC.</div>
+        <p>Endüstriyel Kapı, Otomasyon ve Yedek Parça İmalatı</p>
+      </div>
+
+      <div class="flex items-center space-x-6 text-noir-300">
+        <span>Tel: +90 (850) 888 00 00</span>
+        <span>|</span>
+        <span>E-posta: siparis@torkepenk.com</span>
+      </div>
+
+      <div class="text-center md:text-right">
+        &copy; 2026 TOR Industrial. Tüm hakları saklıdır.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Slide-Over Drawer -->
+  <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" onclick="toggleCartDrawer(false)"></div>
+
+    <div class="fixed inset-y-0 right-0 pl-10 max-w-full flex">
+      <div class="w-screen max-w-md bg-noir-950 border-l border-subtle shadow-2xl flex flex-col justify-between">
+        
+        <!-- Drawer Header -->
+        <div class="p-6 border-b border-subtle flex justify-between items-center bg-black">
+          <div class="flex items-center space-x-2">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+            </svg>
+            <h2 class="text-base font-black uppercase text-white font-mono">SEPETİNİZ</h2>
+          </div>
+          <button onclick="toggleCartDrawer(false)" class="text-noir-400 hover:text-white p-1">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="drawer-cart-items" class="p-6 overflow-y-auto flex-grow space-y-4">
+          <!-- Items populated via JS -->
+        </div>
+
+        <!-- Drawer Footer & Checkout Trigger -->
+        <div class="p-6 border-t border-subtle bg-black space-y-4">
+          <div class="space-y-2 font-mono text-xs">
+            <div class="flex justify-between text-noir-400">
+              <span>Ara Toplam:</span>
+              <span id="drawer-subtotal">0,00 TL</span>
+            </div>
+            <div class="flex justify-between text-noir-400">
+              <span>KDV (%20):</span>
+              <span id="drawer-tax">0,00 TL</span>
+            </div>
+            <div class="flex justify-between text-white text-sm font-bold pt-2 border-t border-subtle">
+              <span>GENEL TOPLAM:</span>
+              <span id="drawer-total" class="text-base">0,00 TL</span>
+            </div>
+          </div>
+
+          <button id="checkout-start-btn" onclick="openCheckoutModal()" class="w-full bg-white text-black font-mono font-bold py-3 text-xs uppercase tracking-widest hover:bg-noir-200 transition-all rounded-sm">
+            SİPARİŞİ TAMAMLA & GÖNDER →
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Modal -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md hidden">
+    <div class="bg-noir-900 border border-subtle w-full max-w-xl p-6 sm:p-8 rounded-sm space-y-6 max-h-[90vh] overflow-y-auto animate-fade-in">
+      
+      <div class="flex justify-between items-center border-b border-subtle pb-4">
+        <div>
+          <span class="text-[10px] font-mono text-noir-400 uppercase">// İLETİŞİM VE TESLİMAT</span>
+          <h3 class="text-xl font-black uppercase text-white">SİPARİŞ BİLGİLERİ</h3>
+        </div>
+        <button onclick="closeCheckoutModal()" class="text-noir-400 hover:text-white">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <form id="order-form" onsubmit="submitOrder(event)" class="space-y-4 text-xs font-mono">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-noir-400 mb-1 uppercase">Ad Soyad / Firma Ünvanı *</label>
+            <input type="text" id="cust-name" required placeholder="Ahmet Yılmaz - Yılmaz Otomasyon" class="w-full bg-black border border-subtle p-3 text-white focus:outline-none focus:border-white">
+          </div>
+          <div>
+            <label class="block text-noir-400 mb-1 uppercase">Telefon Numarası *</label>
+            <input type="tel" id="cust-phone" required placeholder="0532 XXX XX XX" class="w-full bg-black border border-subtle p-3 text-white focus:outline-none focus:border-white">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-noir-400 mb-1 uppercase">İl *</label>
+            <input type="text" id="cust-city" required placeholder="İstanbul" class="w-full bg-black border border-subtle p-3 text-white focus:outline-none focus:border-white">
+          </div>
+          <div>
+            <label class="block text-noir-400 mb-1 uppercase">İlçe *</label>
+            <input type="text" id="cust-district" required placeholder="İkitelli OSB" class="w-full bg-black border border-subtle p-3 text-white focus:outline-none focus:border-white">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-noir-400 mb-1 uppercase">Açık Adres *</label>
+          <textarea id="cust-address" rows="3" required placeholder="Mahalle, Cadde, Sokak, No ve Atölye Detayları..." class="w-full bg-black border border-subtle p-3 text-white focus:outline-none focus:border-white"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-noir-400 mb-1 uppercase">Sipariş Notu / Özel Ölçüler (Opsiyonel)</label>
+          <input type="text" id="cust-note" placeholder="Örn: Paletler 4.20 metre boyunda kesilecek" class="w-full bg-black border border-subtle p-3 text-white focus:outline-none focus:border-white">
+        </div>
+
+        <!-- Order Summary Box inside Modal -->
+        <div class="bg-black border border-subtle p-4 space-y-2">
+          <div class="flex justify-between text-noir-400">
+            <span>Toplam Ürün Kalemi:</span>
+            <span id="modal-item-count" class="text-white font-bold">0</span>
+          </div>
+          <div class="flex justify-between text-white font-bold text-sm border-t border-subtle pt-2">
+            <span>ÖDENECEK TOPLAM TUTAR:</span>
+            <span id="modal-total-price">0,00 TL</span>
+          </div>
+        </div>
+
+        <button type="submit" id="submit-order-btn" class="w-full bg-white text-black font-bold py-4 uppercase tracking-widest text-xs hover:bg-noir-200 transition-colors">
+          ⚡ SİPARİŞİ ONAYLA VE TELEGRAM'A GÖNDER
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Product Detail Modal -->
+  <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm hidden">
+    <div class="bg-noir-900 border border-subtle w-full max-w-2xl p-6 sm:p-8 rounded-sm space-y-6 animate-fade-in relative">
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 text-noir-400 hover:text-white">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <div id="product-modal-content">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+  <script>
+    
+    // =========================================================================
+    // TELEGRAM BOT VE CHAT ID AYARLARI (BURAYA GÖMEBİLİRSİNİZ)
+    // =========================================================================
+    const TELEGRAM_TOKEN = "123456789:ABCdefGHIjklMNOpqrsTUVwxyz_123456";  // Bot Token'ınızı buraya tırnak içine yazın
+    const TELEGRAM_CHAT_ID = "-1001234567890";                          // Chat ID'nizi buraya tırnak içine yazın
+    // =========================================================================
+
+    // Global State
+    let cart = [];
+    let activeCategory = 'ALL';
+    let searchQuery = '';
+
+    // Product Database
+    const products = [
+      {
+        id: 'PRD-101',
+        name: 'TOR Heavy-Force 120Nm Tüp Motor',
+        category: 'MOTOR',
+        price: 2450,
+        stock: 35,
+        code: 'MOT-120-HD',
+        desc: '60mm sekizgen boruya uygun, termik korumalı, manuel kolla açılabilir endüstriyel tüp motor.',
+        specs: ['120 Nm Tork', '12 Rpm Hız', 'Termik Korumalı', '230V / 50Hz']
+      },
+      {
+        id: 'PRD-102',
+        name: 'TOR Heavy-Force 180Nm Tüp Motor',
+        category: 'MOTOR',
+        price: 3200,
+        stock: 22,
+        code: 'MOT-180-HD',
+        desc: 'Yüksek kepenk açıklıkları ve ağır çelik paletler için tasarlanmış ekstra tork gücü.',
+        specs: ['180 Nm Tork', '10 Rpm Hız', 'Ağır Hizmet Sınıfı', 'Sessiz Çalışma']
+      },
+      {
+        id: 'PRD-103',
+        name: 'TOR Extreme-Power 300Nm Sanayi Motoru',
+        category: 'MOTOR',
+        price: 5800,
+        stock: 12,
+        code: 'MOT-300-IND',
+        desc: 'Fabrika ve hangar kapıları için zincir aktarmalı endüstriyel tip motor.',
+        specs: ['300 Nm Tork', '8 Rpm Hız', 'Zincir Aktarmalı', 'Manuel İmdat Kolu']
+      },
+      {
+        id: 'PRD-201',
+        name: 'TOR Smart-Control Alıcı Kartı & 2x Kumanda',
+        category: 'KONTROL',
+        price: 780,
+        stock: 80,
+        code: 'KNT-ALC-01',
+        desc: '433.92 MHz Rolling Code korumalı, harici buton ve emniyet fotoseli girişli kontrol kartı.',
+        specs: ['Rolling Code', 'Harici Buton Girişi', 'Otom. Kapanma Süresi', '2 Adet Kumanda']
+      },
+      {
+        id: 'PRD-202',
+        name: 'TOR Metal Kasa Ekstra Kumanda (4 Kanallı)',
+        category: 'KONTROL',
+        price: 190,
+        stock: 150,
+        code: 'KNT-KUM-04',
+        desc: 'Darbe ve suya dayanıklı krom kaplama metal çerçeveli 4 kanallı garaj ve kepenk kumandası.',
+        specs: ['433.92 MHz', '4 Bağımsız Kanal', 'Krom Çerçeve', 'Uzun Menzil']
+      },
+      {
+        id: 'PRD-203',
+        name: 'Endüstriyel Mantar Buton & Şalter Kutusu',
+        category: 'KONTROL',
+        price: 340,
+        stock: 45,
+        code: 'KNT-BTN-IND',
+        desc: 'Acil stop butonlu, kilitli şalter mekanizmasına sahip ağır hizmet kontrol kutusu.',
+        specs: ['Acil Stop', 'Kilitli Sistem', 'IP65 Su Geçirmez', 'Duvar Tipi']
+      },
+      {
+        id: 'PRD-301',
+        name: 'ST-37 Galvaniz Çelik Palet (Metre)',
+        category: 'PALET',
+        price: 280,
+        stock: 500,
+        code: 'PLT-CLK-80',
+        desc: '0.80mm et kalınlığında, paslanmaz galvaniz kaplamalı 80mm profil palet.',
+        specs: ['0.80mm Galvaniz', '80mm Profil Eni', 'Rüzgar Dirençli', 'Özel Kesim']
+      },
+      {
+        id: 'PRD-302',
+        name: 'Poliüretan Dolgulu Alüminyum Palet (Metre)',
+        category: 'PALET',
+        price: 360,
+        stock: 320,
+        code: 'PLT-ALU-77',
+        desc: '77mm yükseklikte ısı ve ses yalıtımlı poliüretan dolgulu lüks alüminyum profil.',
+        specs: ['Isı & Ses Yalıtımlı', '77mm Profil', 'Eloksallı Kaplama', 'Hafif & Sessiz']
+      },
+      {
+        id: 'PRD-303',
+        name: 'Ağır Hizmet Yan Dikme Kılavuz Fitili (10 Metre)',
+        category: 'PALET',
+        price: 210,
+        stock: 90,
+        code: 'AKS-FTL-10M',
+        desc: 'Kepenk paletlerinin sessiz kaymasını sağlayan ve rüzgar sesini kesen kauçuk fitil.',
+        specs: ['10 Metre Rulo', 'EPDM Kauçuk', 'Sessiz Çalışma', 'Aşınmaz']
+      },
+      {
+        id: 'PRD-401',
+        name: 'Kızılötesi Emniyet Fotosel Seti',
+        category: 'GÜVENLİK',
+        price: 460,
+        stock: 60,
+        code: 'GVN-FOT-01',
+        desc: 'Kepenk kapanırken engel algıladığında durup geri açılmasını sağlayan infrared fotosel.',
+        specs: ['15m Algılama Mesafe', 'Röle Çıkışlı', '12V-24V AC/DC', 'IP54 Koruma']
+      },
+      {
+        id: 'PRD-402',
+        name: 'Flaşör Lamba & Harici Anten Seti',
+        category: 'GÜVENLİK',
+        price: 290,
+        stock: 75,
+        code: 'GVN-FLS-220',
+        desc: 'Kepenk hareketi esnasında uyarı veren yüksek parlaklıklı LED ikaz lambası.',
+        specs: ['220V LED Light', 'Entegre Anten', 'Sarı İkaz Camı', 'Düşük Güç']
+      },
+      {
+        id: 'PRD-403',
+        name: 'Manuel Çelik Yay Takımı (Çift)',
+        category: 'GÜVENLİK',
+        price: 920,
+        stock: 40,
+        code: 'AKS-YY-200',
+        desc: 'Elektrik kesintisinde kepenk tamburunun kolay kalkmasını sağlayan temperli çelik yay.',
+        specs: ['Temperli Çelik', 'Çift Takım', '200mm Kasnak Uyumlu', 'Ağır Yük']
+      }
+    ];
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderProducts();
+      updateCartBadge();
+    });
+
+    // Render Product Cards
+    function renderProducts() {
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = '';
+
+      const filtered = products.filter(p => {
+        const matchesCat = (activeCategory === 'ALL' || p.category === activeCategory);
+        const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                              p.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              p.desc.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCat && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full border border-subtle p-12 text-center bg-black font-mono">
+            <p class="text-noir-400 text-sm uppercase">Aradığınız kriterlere uygun ürün bulunamadı.</p>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'border border-subtle bg-noir-900 hover:border-white transition-all flex flex-col justify-between p-5 group rounded-sm';
+        
+        card.innerHTML = `
+          <div>
+            <!-- Code & Category Badge -->
+            <div class="flex justify-between items-center text-[10px] font-mono text-noir-400 mb-2">
+              <span class="bg-black px-2 py-0.5 border border-subtle">${p.code}</span>
+              <span class="uppercase tracking-widest text-noir-300 font-bold">${p.category}</span>
+            </div>
+
+            <!-- Title -->
+            <h3 class="font-bold text-white text-sm uppercase tracking-tight group-hover:text-noir-200 transition-colors line-clamp-2 min-h-[40px]">
+              ${p.name}
+            </h3>
+
+            <!-- Description -->
+            <p class="text-xs text-noir-400 font-light mt-2 line-clamp-2 leading-relaxed">
+              ${p.desc}
+            </p>
+
+            <!-- Specs Mini Badges -->
+            <div class="flex flex-wrap gap-1 mt-3">
+              ${p.specs.slice(0, 2).map(s => `<span class="text-[9px] font-mono bg-black text-noir-300 px-1.5 py-0.5 border border-subtle">${s}</span>`).join('')}
+            </div>
+          </div>
+
+          <!-- Price & Action -->
+          <div class="pt-4 mt-4 border-t border-subtle flex items-center justify-between font-mono">
+            <div>
+              <span class="text-[10px] text-noir-400 block uppercase">Birim Fiyat</span>
+              <span class="text-lg font-black text-white">${formatPrice(p.price)} TL</span>
+            </div>
+
+            <div class="flex space-x-2">
+              <button onclick="openProductModal('${p.id}')" title="Hızlı İncele" class="border border-subtle p-2 text-noir-300 hover:text-white hover:border-white transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+              </button>
+              
+              <button onclick="addToCart('${p.id}')" class="bg-white text-black font-bold px-3 py-2 text-xs uppercase tracking-wider hover:bg-noir-200 transition-colors">
+                SEPETE EKLE
+              </button>
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    function selectCategory(cat) {
+      activeCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('bg-white', 'text-black', 'border-white');
+        btn.classList.add('border-subtle', 'text-noir-300');
+      });
+      event.target.classList.add('bg-white', 'text-black', 'border-white');
+      event.target.classList.remove('border-subtle', 'text-noir-300');
+      renderProducts();
+    }
+
+    function filterProducts() {
+      searchQuery = document.getElementById('search-input').value;
+      renderProducts();
+    }
+
+    function addToCart(productId, qty = 1) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      const existingItem = cart.find(item => item.id === productId);
+      if (existingItem) {
+        existingItem.qty += qty;
+      } else {
+        cart.push({ ...product, qty: qty });
+      }
+
+      updateCartBadge();
+      renderCartDrawer();
+      showToast(`${product.name} sepete eklendi.`);
+    }
+
+    function updateCartQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+
+      item.qty += delta;
+      if (item.qty <= 0) {
+        cart = cart.filter(i => i.id !== productId);
+      }
+
+      updateCartBadge();
+      renderCartDrawer();
+    }
+
+    function updateCartBadge() {
+      const totalQty = cart.reduce((acc, i) => acc + i.qty, 0);
+      document.getElementById('cart-badge').innerText = totalQty;
+    }
+
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cart-drawer');
+      if (open) {
+        renderCartDrawer();
+        drawer.classList.remove('hidden');
+      } else {
+        drawer.classList.add('hidden');
+      }
+    }
+
+    function renderCartDrawer() {
+      const container = document.getElementById('drawer-cart-items');
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 space-y-3 font-mono">
+            <svg class="w-12 h-12 text-noir-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            <p class="text-noir-400 text-xs uppercase">Sepetinizde henüz ürün bulunmuyor.</p>
+          </div>
+        `;
+        document.getElementById('drawer-subtotal').innerText = '0,00 TL';
+        document.getElementById('drawer-tax').innerText = '0,00 TL';
+        document.getElementById('drawer-total').innerText = '0,00 TL';
+        document.getElementById('checkout-start-btn').disabled = true;
+        document.getElementById('checkout-start-btn').classList.add('opacity-50', 'cursor-not-allowed');
+        return;
+      }
+
+      document.getElementById('checkout-start-btn').disabled = false;
+      document.getElementById('checkout-start-btn').classList.remove('opacity-50', 'cursor-not-allowed');
+
+      let subtotal = 0;
+
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        subtotal += itemTotal;
+
+        const row = document.createElement('div');
+        row.className = 'border border-subtle p-3 bg-black flex justify-between items-center font-mono text-xs';
+        
+        row.innerHTML = `
+          <div class="space-y-1 flex-grow pr-2">
+            <div class="font-bold text-white uppercase text-[11px] line-clamp-1">${item.name}</div>
+            <div class="text-noir-400 text-[10px]">${formatPrice(item.price)} TL x ${item.qty}</div>
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <div class="flex border border-subtle">
+              <button onclick="updateCartQty('${item.id}', -1)" class="px-2 py-0.5 hover:bg-noir-800 text-white">-</button>
+              <span class="px-2 py-0.5 text-white font-bold">${item.qty}</span>
+              <button onclick="updateCartQty('${item.id}', 1)" class="px-2 py-0.5 hover:bg-noir-800 text-white">+</button>
+            </div>
+            <span class="font-bold text-white min-w-[70px] text-right">${formatPrice(itemTotal)} TL</span>
+          </div>
+        `;
+
+        container.appendChild(row);
+      });
+
+      const tax = subtotal * 0.20;
+      const total = subtotal + tax;
+
+      document.getElementById('drawer-subtotal').innerText = `${formatPrice(subtotal)} TL`;
+      document.getElementById('drawer-tax').innerText = `${formatPrice(tax)} TL`;
+      document.getElementById('drawer-total').innerText = `${formatPrice(total)} TL`;
+    }
+
+    function openCheckoutModal() {
+      if (cart.length === 0) return;
+      toggleCartDrawer(false);
+
+      const totalQty = cart.reduce((acc, i) => acc + i.qty, 0);
+      const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const total = subtotal * 1.20;
+
+      document.getElementById('modal-item-count').innerText = `${cart.length} Kalem (${totalQty} Parça)`;
+      document.getElementById('modal-total-price').innerText = `${formatPrice(total)} TL (KDV Dahil)`;
+
+      document.getElementById('checkout-modal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').classList.add('hidden');
+    }
+
+    async function submitOrder(event) {
+      event.preventDefault();
+
+      const btn = document.getElementById('submit-order-btn');
+      btn.disabled = true;
+      btn.innerText = "SİPARİŞ İLETİLİYOR...";
+
+      const name = document.getElementById('cust-name').value;
+      const phone = document.getElementById('cust-phone').value;
+      const city = document.getElementById('cust-city').value;
+      const district = document.getElementById('cust-district').value;
+      const address = document.getElementById('cust-address').value;
+      const note = document.getElementById('cust-note').value || 'Yok';
+
+      const subtotal = cart.reduce((acc, i) => acc + (i.price * i.qty), 0);
+      const tax = subtotal * 0.20;
+      const total = subtotal + tax;
+
+      // Construct Telegram Markdown Message
+      let msg = `🚨 *YENİ SİPARİŞ ALINDI (TOR KEPENK)* 🚨\n\n`;
+      msg += `👤 *Müşteri:* ${name}\n`;
+      msg += `📞 *Telefon:* ${phone}\n`;
+      msg += `📍 *Konum:* ${city} / ${district}\n`;
+      msg += `🏠 *Açık Adres:* ${address}\n`;
+      msg += `📝 *Sipariş Notu:* ${note}\n\n`;
+      msg += `📦 *SİPARİŞ KALEMLERİ:*\n`;
+
+      cart.forEach((item, index) => {
+        msg += `${index + 1}. \`${item.code}\` - ${item.name}\n   └ ${item.qty} adet x ${formatPrice(item.price)} TL = *${formatPrice(item.price * item.qty)} TL*\n`;
+      });
+
+      msg += `\n💰 *Ara Toplam:* ${formatPrice(subtotal)} TL\n`;
+      msg += `🧾 *KDV (%20):* ${formatPrice(tax)} TL\n`;
+      msg += `💳 *GENEL TOPLAM:* *${formatPrice(total)} TL*\n\n`;
+      msg += `⏳ *Tarih:* ${new Date().toLocaleString('tr-TR')}`;
+
+      try {
+        if (!TELEGRAM_TOKEN || TELEGRAM_TOKEN === '123456789:ABCdefGHIjklMNOpqrsTUVwxyz_123456' || !TELEGRAM_CHAT_ID || TELEGRAM_CHAT_ID === '-1001234567890') {
+          showToast('⚠️ Lütfen koddaki TELEGRAM_TOKEN ve TELEGRAM_CHAT_ID değişkenlerini doldurun!', 'warning');
+        } else {
+          const res = await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              chat_id: TELEGRAM_CHAT_ID,
+              text: msg,
+              parse_mode: 'Markdown'
+            })
+          });
+
+          if (!res.ok) throw new Error('Telegram API Yanıtı Başarısız');
+        }
+
+        showToast('✅ Siparişiniz Telegram üzerinden başarıyla iletildi!');
+        cart = [];
+        updateCartBadge();
+        closeCheckoutModal();
+        document.getElementById('order-form').reset();
+
+      } catch (err) {
+        showToast('❌ Bildirim gönderilirken bir hata oluştu: ' + err.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "⚡ SİPARİŞİ ONAYLA VE TELEGRAM'A GÖNDER";
+      }
+    }
+
+    function openProductModal(id) {
+      const p = products.find(item => item.id === id);
+      if (!p) return;
+
+      const content = document.getElementById('product-modal-content');
+      content.innerHTML = `
+        <div class="space-y-4 font-mono">
+          <div class="flex justify-between items-center text-xs text-noir-400 border-b border-subtle pb-3">
+            <span>KOD: ${p.code}</span>
+            <span class="text-white font-bold">${p.category}</span>
+          </div>
+
+          <h2 class="text-xl font-bold uppercase text-white">${p.name}</h2>
+          
+          <p class="text-xs text-noir-300 leading-relaxed font-sans font-light">
+            ${p.desc}
+          </p>
+
+          <div class="bg-black border border-subtle p-4 space-y-2">
+            <span class="text-[10px] text-noir-400 uppercase block">TEKNİK ÖZELLİKLER:</span>
+            <ul class="grid grid-cols-2 gap-2 text-xs text-noir-200">
+              ${p.specs.map(s => `<li class="flex items-center space-x-2"><span>▪</span><span>${s}</span></li>`).join('')}
+            </ul>
+          </div>
+
+          <div class="flex justify-between items-center pt-4 border-t border-subtle">
+            <div>
+              <span class="text-[10px] text-noir-400 block uppercase">FİYAT</span>
+              <span class="text-2xl font-black text-white">${formatPrice(p.price)} TL</span>
+            </div>
+
+            <button onclick="addToCart('${p.id}'); closeProductModal();" class="bg-white text-black font-bold px-6 py-3 text-xs uppercase tracking-wider hover:bg-noir-200 transition-colors">
+              SEPETE EKLE
+            </button>
+          </div>
+        </div>
+      `;
+
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function closeProductModal() {
+      document.getElementById('product-modal').classList.add('hidden');
+    }
+
+    function formatPrice(val) {
+      return new Intl.NumberFormat('tr-TR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(val);
+    }
+
+    function showToast(msg, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      
+      let borderCol = 'border-white';
+      if (type === 'error') borderCol = 'border-red-500';
+      if (type === 'warning') borderCol = 'border-yellow-500';
+
+      toast.className = `bg-black text-white text-xs font-mono border ${borderCol} p-3 shadow-2xl transition-all duration-300 pointer-events-auto flex items-center space-x-2 animate-fade-in`;
+      toast.innerHTML = `<span>${msg}</span>`;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
